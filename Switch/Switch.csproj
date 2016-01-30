@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ILetterCollection.cs" />
+    <Compile Include="Collections\LetterCollection.cs" />
     <Compile Include="Letters\AbstractLetter.cs" />
     <Compile Include="Letters\ALetter.cs" />
     <Compile Include="Letters\BLetter.cs" />

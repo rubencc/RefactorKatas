@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Switch.Collections;
 using Switch.Letters;
 using Switch.Writter;
 
@@ -9,7 +10,7 @@ namespace Switch
     public class LettersReader
     {
         private readonly IOutputWritter writter;
-        private readonly List<ILetter> letters;
+        private readonly ILetterCollection letters;
 
         public LettersReader(IOutputWritter writter)
         {
@@ -20,15 +21,18 @@ namespace Switch
 
             this.writter = writter;
 
-            this.letters = new List<ILetter>() {new ALetter(this.writter), new BLetter(this.writter), new CLetter(this.writter), new DLetter(this.writter)};
+            this.letters = new LetterCollection();
+            this.letters.Add(new ALetter(this.writter));
+            this.letters.Add(new BLetter(this.writter));
+            this.letters.Add(new CLetter(this.writter));
+            this.letters.Add(new DLetter(this.writter));
         }
 
         public void ReadLetter(char c)
         {
-            if (this.letters.Exists(item => item.IsForThisChar(c)))
+            if (this.letters.Contains(c))
             {
-                ILetter letter = this.letters.Find(item => item.IsForThisChar(c));
-                letter.ExecuteAction();
+                this.letters.Execute(c);
             }
             else
             {
