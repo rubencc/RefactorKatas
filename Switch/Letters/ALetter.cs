@@ -9,11 +9,17 @@ namespace Switch.Letters
 {
     public class ALetter : AbstractLetter
     {
-
+        private readonly IOutputWritter writter;
         public ALetter(IOutputWritter writter)
-            :base(writter)
-        {          
-            this.SetAction(() => this.Write("Primera letra del alfabeto"));
+        {
+            if (writter == null)
+            {
+                throw new ArgumentNullException(nameof(writter));
+            }
+
+            this.writter = writter;
+            this.SetChar('a');
+            this.SetAction(() => this.writter.WriteLine("Primera letra del alfabeto"));
         }
     }
 }

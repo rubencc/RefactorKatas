@@ -11,22 +11,7 @@ namespace Switch.Letters
     {
         private Action action;
         private readonly IOutputWritter writter;
-
-        public AbstractLetter(IOutputWritter writter)
-        {
-            if (writter == null)
-            {
-                throw new ArgumentNullException(nameof(writter));
-            }
-
-            this.writter = writter;
-        }
-
-
-        protected void Write(object input)
-        {
-            this.writter.WriteLine(input);
-        }
+        private char c;
 
         protected void SetAction(Action act)
         {
@@ -34,6 +19,11 @@ namespace Switch.Letters
             {
                 this.action = act;
             }
+        }
+
+        protected void SetChar(char c)
+        {
+            this.c = c;
         }
 
         public Action GetAction()
@@ -44,6 +34,11 @@ namespace Switch.Letters
         public void ExecuteAction()
         {
             this.action.Invoke();
+        }
+
+        public bool IsForThisChar(char c)
+        {
+            return this.c == c;
         }
     }
 }

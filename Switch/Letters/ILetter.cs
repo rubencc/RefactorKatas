@@ -10,5 +10,6 @@ namespace Switch.Letters
     {
         Action GetAction();
         void ExecuteAction();
+        bool IsForThisChar(char c);
     }
 }

@@ -9,11 +9,17 @@ namespace Switch.Letters
 {
     public class BLetter : AbstractLetter
     {
+        private readonly IOutputWritter writter;
         public BLetter(IOutputWritter writter)
-            : base(writter)
         {
+            if (writter == null)
+            {
+                throw new ArgumentNullException(nameof(writter));
+            }
 
-            this.SetAction(() => this.Write("Sí, es una b"));
+            this.writter = writter;
+            this.SetChar('b');
+            this.SetAction(() => this.writter.WriteLine("Sí, es una b"));
         }
     }
 }

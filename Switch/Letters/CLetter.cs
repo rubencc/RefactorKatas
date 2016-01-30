@@ -9,11 +9,17 @@ namespace Switch.Letters
 {
     public class CLetter : AbstractLetter
     {
+        private readonly IOutputWritter writter;
         public CLetter(IOutputWritter writter)
-            : base(writter)
         {
+            if (writter == null)
+            {
+                throw new ArgumentNullException(nameof(writter));
+            }
 
-            this.SetAction(() => this.Write("Constante fisica que define la velocidad de la luz"));
+            this.writter = writter;
+            this.SetChar('c');
+            this.SetAction(() => this.writter.WriteLine("Constante fisica que define la velocidad de la luz"));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Switch.Letters;
 using Switch.Writter;
 
@@ -8,7 +9,7 @@ namespace Switch
     public class LettersReader
     {
         private readonly IOutputWritter writter;
-        private readonly Dictionary<char, Action> map;
+        private readonly List<ILetter> letters;
 
         public LettersReader(IOutputWritter writter)
         {
@@ -18,19 +19,16 @@ namespace Switch
             }
 
             this.writter = writter;
-            this.map = new Dictionary<char, Action>();
 
-            map.Add('a', () => new ALetter(this.writter).GetAction());
-            map.Add('b', () => new BLetter(this.writter).GetAction());
-            map.Add('c', () => new CLetter(this.writter).GetAction());
-            map.Add('d', () => new DLetter(this.writter).GetAction());
+            this.letters = new List<ILetter>() {new ALetter(this.writter), new BLetter(this.writter), new CLetter(this.writter), new DLetter(this.writter)};
         }
 
         public void ReadLetter(char c)
         {
-            if (map.ContainsKey(c))
+            if (this.letters.Exists(item => item.IsForThisChar(c)))
             {
-                map[c].Invoke();
+                ILetter letter = this.letters.Find(item => item.IsForThisChar(c));
+                letter.ExecuteAction();
             }
             else
             {
