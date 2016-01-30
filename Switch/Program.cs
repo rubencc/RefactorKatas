@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Switch.Letters;
+using Switch.Writter;
 
 namespace Switch
 {
@@ -16,26 +17,14 @@ namespace Switch
             var key = Console.ReadKey();
             Console.WriteLine(String.Empty);
 
-            Dictionary<char, Action> map = new Dictionary<char, Action>();
+            LettersReader reader = new LettersReader(new ConsoleWritter());
 
-            map.Add('a', new ALetter().GetAction());
-            map.Add('b', new BLetter().GetAction());
-            map.Add('c', new CLetter().GetAction());
-            map.Add('d', new DLetter().GetAction());
-
-            if (map.ContainsKey(key.KeyChar))
-            {
-                map[key.KeyChar].Invoke();
-            }
-            else
-            {
-                Action act = () => Console.WriteLine("Ha escrito: {0} ", key.KeyChar);
-                act.Invoke();
-            }
+            reader.ReadLetter(key.KeyChar);          
 
             Console.WriteLine(String.Empty);
             Console.WriteLine("Fin");
             Console.ReadKey();
         }
+
     }
 }

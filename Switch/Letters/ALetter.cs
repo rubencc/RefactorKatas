@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Switch.Writter;
 
 namespace Switch.Letters
 {
     public class ALetter : AbstractLetter
     {
-        public ALetter()
-        {
-            this.SetAction(() => Console.WriteLine("Primera letra del alfabeto"));
+
+        public ALetter(IOutputWritter writter)
+            :base(writter)
+        {          
+            this.SetAction(() => this.Write("Primera letra del alfabeto"));
         }
     }
 }
