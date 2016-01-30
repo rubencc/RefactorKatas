@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,23 +15,21 @@ namespace Switch
             var key = Console.ReadKey();
             Console.WriteLine(String.Empty);
 
-            switch ((key.KeyChar))
+            Dictionary<char, Action> map = new Dictionary<char, Action>();
+
+            map.Add('a', () => Console.WriteLine("Primera letra del alfabeto"));
+            map.Add('b', () => Console.WriteLine("Sí, es una b"));
+            map.Add('c', () => Console.WriteLine("Constante fisica que define la velocidad de la luz"));
+            map.Add('d', () => Console.WriteLine("Es una b especular"));
+
+            if (map.ContainsKey(key.KeyChar))
             {
-                case 'a':
-                    Console.WriteLine("Primera letra del alfabeto");
-                    break;
-                case 'b':
-                    Console.WriteLine("Sí, es una b");
-                    break;
-                case 'c':
-                    Console.WriteLine("Constante fisica que define la velocidad de la luz");
-                    break;
-                case 'd':
-                    Console.WriteLine("Es una b especular");
-                    break;
-                default:
-                    Console.WriteLine("Ha escrito: {0} ", key.KeyChar);
-                    break;
+                map[key.KeyChar].Invoke();
+            }
+            else
+            {
+                Action act = () => Console.WriteLine("Ha escrito: {0} ", key.KeyChar);
+                act.Invoke();
             }
 
             Console.WriteLine(String.Empty);
@@ -38,6 +37,6 @@ namespace Switch
             Console.ReadKey();
         }
 
-        
+        delegate void Letters(string s);
     }
 }
