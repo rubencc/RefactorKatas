@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Letters\AbstractLetter.cs" />
+    <Compile Include="Letters\ALetter.cs" />
+    <Compile Include="Letters\BLetter.cs" />
+    <Compile Include="Letters\CLetter.cs" />
+    <Compile Include="Letters\DLetter.cs" />
+    <Compile Include="Letters\ILetter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

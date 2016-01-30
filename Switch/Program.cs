@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Switch.Letters;
 
 namespace Switch
 {
@@ -17,10 +18,10 @@ namespace Switch
 
             Dictionary<char, Action> map = new Dictionary<char, Action>();
 
-            map.Add('a', () => Console.WriteLine("Primera letra del alfabeto"));
-            map.Add('b', () => Console.WriteLine("Sí, es una b"));
-            map.Add('c', () => Console.WriteLine("Constante fisica que define la velocidad de la luz"));
-            map.Add('d', () => Console.WriteLine("Es una b especular"));
+            map.Add('a', new ALetter().GetAction());
+            map.Add('b', new BLetter().GetAction());
+            map.Add('c', new CLetter().GetAction());
+            map.Add('d', new DLetter().GetAction());
 
             if (map.ContainsKey(key.KeyChar))
             {
@@ -36,7 +37,5 @@ namespace Switch
             Console.WriteLine("Fin");
             Console.ReadKey();
         }
-
-        delegate void Letters(string s);
     }
 }
