@@ -13,6 +13,16 @@ namespace Switch.Letters
         private readonly IOutputWritter writter;
         private char c;
 
+        protected AbstractLetter(IOutputWritter writter)
+        {
+            if (writter == null)
+            {
+                throw new ArgumentNullException(nameof(writter));
+            }
+
+            this.writter = writter;
+        }
+
         protected void SetAction(Action act)
         {
             if (act != null)
@@ -24,6 +34,11 @@ namespace Switch.Letters
         protected void SetChar(char c)
         {
             this.c = c;
+        }
+
+        protected void Write(object input)
+        {
+            this.writter.WriteLine(input);
         }
 
         public Action GetAction()
