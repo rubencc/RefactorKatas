@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Switch.Collections;
 using Switch.Letters;
+using Switch.Loader;
 using Switch.Writter;
 
 namespace Switch
@@ -11,21 +12,24 @@ namespace Switch
     {
         private readonly IOutputWritter writter;
         private readonly ILetterCollection letters;
+        private readonly ILetterLoader loader;
 
-        public LettersReader(IOutputWritter writter)
+        public LettersReader(IOutputWritter writter, ILetterLoader loader)
         {
             if (writter == null)
             {
                 throw new ArgumentNullException(nameof(writter));
             }
 
-            this.writter = writter;
+            if (loader == null)
+            {
+                throw new ArgumentNullException(nameof(loader));
+            }
 
-            this.letters = new LetterCollection();
-            this.letters.Add(new ALetter(this.writter));
-            this.letters.Add(new BLetter(this.writter));
-            this.letters.Add(new CLetter(this.writter));
-            this.letters.Add(new DLetter(this.writter));
+            this.writter = writter;
+            this.loader = loader;
+
+            this.letters = this.loader.Load();
         }
 
         public void ReadLetter(char c)

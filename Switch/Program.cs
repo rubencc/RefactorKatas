@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Switch.Letters;
+using Switch.Loader;
 using Switch.Writter;
 
 namespace Switch
@@ -13,12 +14,13 @@ namespace Switch
     {
         static void Main(string[] args)
         {
+            LetterLoader loader = new LetterLoader(ConsoleWritter.Instance);
+            LettersReader reader = new LettersReader(ConsoleWritter.Instance, loader);
+
             Console.WriteLine("Escribe una letra: ");
             var key = Console.ReadKey();
             Console.WriteLine(String.Empty);
-
-            LettersReader reader = new LettersReader(new ConsoleWritter());
-
+           
             reader.ReadLetter(key.KeyChar);          
 
             Console.WriteLine(String.Empty);

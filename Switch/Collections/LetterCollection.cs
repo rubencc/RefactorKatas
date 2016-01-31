@@ -9,11 +9,16 @@ namespace Switch.Collections
 {
     public class LetterCollection : ILetterCollection
     {
-        private List<ILetter> letters;
+        private readonly List<ILetter> letters;
 
         public LetterCollection()
         {
             this.letters = new List<ILetter>();
+        }
+
+        public LetterCollection(List<ILetter> list)
+        {
+            this.letters = list;
         }
 
         public void Add(ILetter letter)
