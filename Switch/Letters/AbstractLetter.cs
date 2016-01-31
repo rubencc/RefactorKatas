@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Switch.Writter;
 
 namespace Switch.Letters
@@ -31,9 +27,9 @@ namespace Switch.Letters
             }
         }
 
-        protected void SetChar(char c)
+        protected void SetChar(char character)
         {
-            this.c = c;
+            this.c = character;
         }
 
         protected void Write(object input)
@@ -51,9 +47,11 @@ namespace Switch.Letters
             this.action.Invoke();
         }
 
-        public bool IsForThisChar(char c)
+        public bool IsForThisChar(char character)
         {
-            return this.c == c;
+            return this.c == character;
         }
+
+        public char Char { get { return this.c; } }
     }
 }

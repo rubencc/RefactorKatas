@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Switch.Letters;
 
 namespace Switch.Collections
@@ -23,8 +20,11 @@ namespace Switch.Collections
 
         public void Add(ILetter letter)
         {
-            if(letter != null)
+            if (letter != null && this.letters.All(item => item.Char != letter.Char))
+            {
                 this.letters.Add(letter);
+            }
+              
         }
 
         public void Delete(char c)

@@ -27,7 +27,6 @@ namespace Switch.Loader
         public ILetterCollection Load()
         {
             List<ILetter> list = new List<ILetter>();
-            ILetterCollection collection;
 
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var name = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
@@ -41,12 +40,12 @@ namespace Switch.Loader
                 {
                     Type[] argTypes = new Type[] { typeof (ConsoleWritter) };
                     ConstructorInfo cInfo = item.GetConstructor(argTypes);
-                    
-                    list.Add((ILetter)cInfo.Invoke(new object[] { this.writter }));
+                    if(cInfo != null)
+                        list.Add((ILetter)cInfo.Invoke(new object[] { this.writter }));
                 }
             }
 
-            collection = new LetterCollection(list);
+            ILetterCollection collection = new LetterCollection(list);
 
             return collection;
         }

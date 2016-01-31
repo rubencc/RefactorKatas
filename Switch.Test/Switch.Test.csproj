@@ -84,10 +84,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ALetterTests.cs" />
-    <Compile Include="BLetterTests.cs" />
-    <Compile Include="CLetterTests.cs" />
-    <Compile Include="DLetterTests.cs" />
+    <Compile Include="Collections\LetterCollectionTests.cs" />
+    <Compile Include="Letters\ALetterTests.cs" />
+    <Compile Include="Letters\BLetterTests.cs" />
+    <Compile Include="Letters\CLetterTests.cs" />
+    <Compile Include="Letters\DLetterTests.cs" />
     <Compile Include="LettersReaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
